@@ -12,8 +12,8 @@ for pp in psutil.process_iter(['pid', 'name', 'username', 'uids', 'cpu_percent',
     if pp.uids().real > 50000000 and pp.name() not in ['sshd', 'bash', 'rsync']:
         if pp.memory_full_info().rss / 1024. / 1024. > 10000:
             print(pp.name(), pp.username(), "large memory", pp.memory_full_info().rss/1024./1024., "M")
-        cp = pp.cpu_percent()
-        if cp > 90 and pp.cpu_times().user > 600:
+        cp = pp.cpu_percent(0.1)
+        if cp > 95 and pp.cpu_times().user > 600:
             print(pp.name(), pp.username(), "cpu usage", cp, "for",
                     pp.cpu_times())
             print(pp.cpu_times().user/60)
