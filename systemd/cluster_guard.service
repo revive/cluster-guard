@@ -1,0 +1,7 @@
+[Unit]
+Description=Cluster process guard - prevent heavy resource consuming
+
+[Service]
+ExecStart=/usr/bin/python3 /root/bin/cluster-guard.py
+StandardOutput=syslog
+StandardError=syslog
